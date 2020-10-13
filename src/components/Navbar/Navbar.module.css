@@ -1,0 +1,18 @@
+.nav {
+  grid-area: n;
+  padding: 20px;
+  background-color: burlywood;
+}
+
+.item {
+  margin: 10px 0;
+}
+.item a {
+  color: white;
+  text-decoration: none;
+  transition: ease 0.4s all;
+}
+.item a.active {
+  font-weight: bold;
+  color: green;
+}
