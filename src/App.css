@@ -6,8 +6,8 @@
     "h h"
     "n c";
 
-  grid-template-rows: 60px 1f;
-  grid-template-columns: 2fr 10 fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
 }
 .app-wrapper-content {
   grid-area: c;

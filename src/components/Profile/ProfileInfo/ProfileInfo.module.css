@@ -1,0 +1,9 @@
+.content_img {
+  width: 50%;
+  margin: auto;
+  height: auto;
+  object-fit: cover;
+}
+.descriptionBlock {
+  padding: 10px;
+}
