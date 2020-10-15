@@ -5,7 +5,7 @@ let initialState = {
     { id: 1, message: "First post " },
     { id: 2, message: "Second post )" },
   ],
-  newPostText: "New post",
+  newPostText: "New post"
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -13,7 +13,7 @@ export const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       let newPost = {
         id: 5,
-        message: state.profilePage.newPostText,
+        message: state.newPostText,
         likesCount: 0,
       };
       state.posts.push(newPost);
