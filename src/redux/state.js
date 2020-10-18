@@ -11,11 +11,8 @@ import { profileReducer } from "./profile-reducer";
 export let store = {
   _state: {
     profilePage: {
-      posts: [
-        { id: 1, message: "First post " },
-        { id: 2, message: "Second post )" },
-      ],
-      newPostText: "New post",
+      
+      
     },
     dialogsPage: {
       dialogs: [

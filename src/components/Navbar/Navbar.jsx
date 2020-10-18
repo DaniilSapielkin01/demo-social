@@ -21,8 +21,13 @@ export const Navbar = () => {
         </NavLink>
       </div>
       <div className={stl.item}>
-        <NavLink to="music" activeClassName={stl.active}>
-          Music{" "}
+        <NavLink to="/music" activeClassName={stl.active}>
+          Music
+        </NavLink>
+      </div>
+      <div className={stl.item}>
+        <NavLink to="/users" activeClassName={stl.active}>
+          Users
         </NavLink>
       </div>
     </nav>

@@ -1,11 +1,12 @@
-import { ADD_POST, UPDATE_NEW_POST_TEXT } from "../constans";
+import { ADD_POST, UPDATE_NEW_POST_TEXT, SET_USER_PROFILE } from "../constans";
 
 let initialState = {
+  profile: null,
   posts: [
     { id: 1, message: "First post " },
     { id: 2, message: "Second post )" },
   ],
-  newPostText: "New post"
+  newPostText: "New post",
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -16,14 +17,22 @@ export const profileReducer = (state = initialState, action) => {
         message: state.newPostText,
         likesCount: 0,
       };
-      state.posts.push(newPost);
-      state.newPostText = "";
-      return state;
-
+      return {
+        ...state,
+        posts: [...state.posts, newPost],
+        newPostText: "",
+      };
     case UPDATE_NEW_POST_TEXT:
-      state.newPostText = action.newText;
-      return state;
+      return {
+        ...state,
+        newPostText: action.newText,
+      };
 
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        user: action.profile,
+      };
     default:
       return state;
   }
@@ -35,4 +44,8 @@ export const addPostActionCreator = () => ({
 export const updateNewPostTextAcionCreator = (text) => ({
   type: UPDATE_NEW_POST_TEXT,
   newText: text,
+});
+export const setUserProfile = (profile) => ({
+  type: SET_USER_PROFILE,
+  profile,
 });
