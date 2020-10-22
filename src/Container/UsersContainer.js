@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as axios from "axios";
 
 import { Users } from "../components/Users/Users";
 import {
@@ -10,9 +9,10 @@ import {
   setCurrentPage,
   setTotalUsersCount,
   toggleIsFetching,
+  toggleIsFollowingProgress,
 } from "../redux/users-reducer";
-import preloader from "../assets/images/preloader.gif";
 import { Preloader } from "../components/common/Preloader/Preloader";
+import { usersAPI } from "../api/api";
 
 class UsersContainer extends React.Component {
   constructor(props) {
@@ -20,29 +20,23 @@ class UsersContainer extends React.Component {
   }
   componentDidMount() {
     this.props.toggleIsFetching(true);
-    axios
-      // .get(
-      //   `https://social-network.samuraijs.com/api/1.0/users?pages=${this.props.currentPage}&count=${this.props.pageSize}`
-      // )
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
+    usersAPI
+      .getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
         this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setUsers(data.items);
+        this.props.setTotalUsersCount(data.totalCount);
       });
   }
+
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     this.props.toggleIsFetching(false);
-    axios
-      // .get(
-      //   `https://social-network.samuraijs.com/api/1.0/users?pages=${pageNumber}&count=${this.props.pageSize}`
-      // )
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data);
-      });
+
+    usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items);
+    });
   };
 
   render() {
@@ -54,6 +48,8 @@ class UsersContainer extends React.Component {
       users,
       follow,
       unFollow,
+      toggleIsFollowingProgress,
+      followingInProgress,
     } = this.props;
 
     return (
@@ -70,6 +66,8 @@ class UsersContainer extends React.Component {
               users={users}
               follow={follow}
               unFollow={unFollow}
+              toggleIsFollowingProgress={toggleIsFollowingProgress}
+              followingInProgress={followingInProgress}
             />
           )}
         </div>
@@ -84,6 +82,7 @@ const mapStateToProps = (state) => ({
   totalUsersCount: state.usersPage.totalUsersCount,
   currentPage: state.usersPage.currentPage,
   isFetching: state.usersPage.isFetching,
+  followingInProgress: state.usersPage.followingInProgress,
 });
 
 const mapDispatchToProps = {
@@ -93,7 +92,9 @@ const mapDispatchToProps = {
   setCurrentPage,
   setTotalUsersCount,
   toggleIsFetching,
+  toggleIsFollowingProgress,
 
+  //Это создает connect
   // setIsFetching: (isFetching) => {
   // dispatch(toggleIsFetchingAC(isFetching));
   // },

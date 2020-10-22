@@ -6,3 +6,17 @@
   width: 5%;
   margin: 10px;
 }
+.loginBlock {
+  float: right;
+  margin: 15px;
+  padding-top: 3px;
+  font-weight: bold;
+  text-align: center;
+}
+.loginBlock a {
+  color: aliceblue;
+}
+.loginBlock :hover {
+  color: rgb(31, 152, 223);
+  transition: all 0.3s ease;
+}

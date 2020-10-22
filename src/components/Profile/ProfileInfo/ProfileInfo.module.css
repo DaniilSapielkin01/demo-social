@@ -1,7 +1,8 @@
 .content_img {
-  width: 50%;
-  margin: auto;
-  height: auto;
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  border-radius: 50%;
   object-fit: cover;
 }
 .descriptionBlock {

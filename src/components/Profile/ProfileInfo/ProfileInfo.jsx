@@ -1,17 +1,32 @@
 import React from "react";
 import stl from "./ProfileInfo.module.css";
+import { Preloader } from "../../common/Preloader/Preloader";
 
-export const ProfileInfo = () => {
+export const ProfileInfo = (props) => {
+  //Работает за счет асинхронна
+  if (!props.profile) {
+    return <Preloader />;
+  }
   return (
     <div>
       <div>
         <img
           className={stl.content_img}
-          src="https://is5-ssl.mzstatic.com/image/thumb/Purple124/v4/5c/f2/72/5cf27278-05ee-5433-5110-6bf79b05adc9/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png"
-          alt="img"
+          src={
+            props.profile.photos === undefined
+              ? `https://i.pinimg.com/736x/0c/a9/e2/0ca9e28dcb12dc698cfd2beda6d6fa64--youtube.jpg`
+              : ""
+          }
+          alt="image"
         />
       </div>
-      <div className={stl.descriptionBlock}>ava + description</div>
+      <div className={stl.descriptionBlock}>
+        <h3>{props.profile.name}</h3>
+        <h4>
+          <span>Phone: </span>
+          {props.profile.phone}
+        </h4>
+      </div>
     </div>
   );
 };

@@ -27,11 +27,10 @@ export const profileReducer = (state = initialState, action) => {
         ...state,
         newPostText: action.newText,
       };
-
     case SET_USER_PROFILE:
       return {
         ...state,
-        user: action.profile,
+        profile: action.profile,
       };
     default:
       return state;
