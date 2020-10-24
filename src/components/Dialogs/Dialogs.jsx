@@ -1,11 +1,8 @@
 import React from "react";
+import { Redirect } from "react-router";
 import stl from "./Dialogs.module.css";
 import { DialogItem } from "./DialogItem/Dialogtem";
 import { Message } from "./Message/Message";
-import {
-  sendMessageCreator,
-  updateNewMessageBodyCreator,
-} from "../../redux/dialogs-reducer";
 
 export const Dialogs = (props) => {
   let state = props.dialogsPage;
@@ -26,6 +23,8 @@ export const Dialogs = (props) => {
     let body = e.target.value;
     props.updateNewMessageBody(body);
   };
+
+  if (!props.isAuth) return <Redirect to="/login" />;
 
   return (
     <div className={stl.dialogs}>
