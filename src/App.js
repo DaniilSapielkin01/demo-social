@@ -3,12 +3,11 @@ import { Route } from "react-router-dom";
 
 import "./App.css";
 import { Navbar } from "./components/Navbar/Navbar";
-
 import { DialogsContainer } from "./Container/DialogsContainer";
-
 import UsersContainer from "./Container/UsersContainer";
 import ProfileContainer from "./Container/ProfileContainer";
 import HeaderContainer from "./Container/HeaderContainer";
+import { Login } from "./components/Login/Login";
 
 function App(props) {
   return (
@@ -19,6 +18,7 @@ function App(props) {
         <Route exact path="/dialogs" render={() => <DialogsContainer />} />
         <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
         <Route path="/users" render={() => <UsersContainer />} />
+        <Route path="/login" render={() => <Login />} />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as axios from "axios";
 import { withRouter } from "react-router-dom";
 
-import { setUserProfile } from "../redux/profile-reducer";
+import { getUserProfile } from "../redux/profile-reducer";
 import { Profile } from "../components/Profile/Profile";
 
 class ProfileContainer extends React.Component {
@@ -13,12 +13,8 @@ class ProfileContainer extends React.Component {
     if (!userId) {
       userId = 1;
     }
-    axios
-      // .get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-      .get(`https://jsonplaceholder.typicode.com/users/${userId}`)
-      .then((response) => {
-        this.props.setUserProfile(response.data);
-      });
+    //Use Thunk
+    this.props.getUserProfile(userId);
   }
 
   render() {
@@ -34,7 +30,7 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
 });
-const mapDispatchToProps = { setUserProfile };
+const mapDispatchToProps = { getUserProfile };
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 

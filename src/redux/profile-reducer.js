@@ -1,4 +1,5 @@
 import { ADD_POST, UPDATE_NEW_POST_TEXT, SET_USER_PROFILE } from "../constans";
+import { usersAPI } from "../api/api";
 
 let initialState = {
   profile: null,
@@ -48,3 +49,10 @@ export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile,
 });
+
+//Use thunk
+export const getUserProfile = (userId) => (dispatch) => {
+  usersAPI
+    .getProfile(userId)
+    .then((response) => dispatch(setUserProfile(response.data)));
+};
