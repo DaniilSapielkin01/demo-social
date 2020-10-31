@@ -3,26 +3,22 @@ import stl from "./MyPosts.module.css";
 import { Post } from "./Post/Post";
 import AddNewPostForm from "./Post/AddNewPostForm";
 
-export class MyPosts extends React.Component {
-  // shouldComponentUpdate(nextProps, newxtState) {
-  //   return nextProps != this.props || newxtState != this.state;
-  // }
+export const MyPosts = React.memo((props) => {
+  console.log("Render");
 
-  render() {
-    let postsElements = props.posts.map((p) => (
-      <Post message={p.message} likeCount={p.likeCount} />
-    ));
+  let postsElements = props.posts.map((p) => (
+    <Post message={p.message} likeCount={p.likeCount} />
+  ));
 
-    let onAddPost = (values) => {
-      props.addPost(values.newPostText);
-    };
+  let onAddPost = (values) => {
+    props.addPost(values.newPostText);
+  };
 
-    return (
-      <div className={stl.postsBlock}>
-        <h3>My Post</h3>
-        <AddNewPostForm onSubmit={onAddPost} />
-        <div className={stl.posts}>{postsElements}</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={stl.postsBlock}>
+      <h3>My Post</h3>
+      <AddNewPostForm onSubmit={onAddPost} />
+      <div className={stl.posts}>{postsElements}</div>
+    </div>
+  );
+});
