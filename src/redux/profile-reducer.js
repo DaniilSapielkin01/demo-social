@@ -3,6 +3,7 @@ import {
   UPDATE_NEW_POST_TEXT,
   SET_USER_PROFILE,
   SET_STATUS,
+  DELETE_POST,
 } from "../constans";
 import { profileAPI, usersAPI } from "../api/api";
 
@@ -41,6 +42,12 @@ export const profileReducer = (state = initialState, action) => {
         status: action.status,
       };
 
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((p) => p.id !== action.postId),
+      };
+
     default:
       return state;
   }
@@ -59,6 +66,11 @@ export const setUserStatus = (status) => ({
   type: SET_STATUS,
   status,
 });
+export const deletePost = (postId) => ({
+  type: DELETE_POST,
+  postId,
+});
+
 //Use thunk
 export const getUserProfile = (userId) => (dispatch) => {
   usersAPI.getProfile(userId).then((response) => {
