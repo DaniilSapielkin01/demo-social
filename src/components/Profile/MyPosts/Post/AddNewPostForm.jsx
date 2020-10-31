@@ -9,6 +9,9 @@ import { Field, reduxForm } from "redux-form";
 const maxlength10 = maxLengthCreator(10);
 
 const AddNewPostForm = (props) => {
+
+  
+
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
