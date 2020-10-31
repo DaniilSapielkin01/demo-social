@@ -3,27 +3,22 @@ import { compose } from "redux";
 import { Dialogs } from "../components/Dialogs/Dialogs";
 import { WithAuthRedirect } from "../hoc/WithAuthRedirect";
 import {
-  updateNewMessageBodyCreator,
   sendMessageCreator,
 } from "../redux/dialogs-reducer";
 
 const mapStateToProps = (state) => ({
   dialogsPage: state.dialogsPage,
-  isAuth: state.isAuth.isAuth,
+  isAuth: state.auth.isAuth,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateNewMessageBody: (body) => {
-    dispatch(updateNewMessageBodyCreator(body));
-  },
-  sendMessage: () => {
-    dispatch(sendMessageCreator());
+
+  sendMessage: (newMessageBody) => {
+    dispatch(sendMessageCreator(newMessageBody));
   },
 });
 
-
-
 export const DialogsContainer = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  WithAuthRedirect
+  // WithAuthRedirect
 )(Dialogs);
