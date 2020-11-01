@@ -5,7 +5,7 @@ import { compose } from "redux";
 
 import "./App.css";
 import { Navbar } from "./components/Navbar/Navbar";
-import { DialogsContainer } from "./Container/DialogsContainer";
+import DialogsContainer from "./Container/DialogsContainer";
 import UsersContainer from "./Container/UsersContainer";
 import ProfileContainer from "./Container/ProfileContainer";
 import HeaderContainer from "./Container/HeaderContainer";
@@ -20,6 +20,7 @@ class App extends React.Component {
   }
 
   render() {
+    // debugger;
     if (!this.props.initialized) {
       return <Preloader />;
     } else {

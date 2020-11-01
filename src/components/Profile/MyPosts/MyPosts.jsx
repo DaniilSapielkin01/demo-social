@@ -5,7 +5,7 @@ import AddNewPostForm from "./Post/AddNewPostForm";
 
 export const MyPosts = React.memo((props) => {
   console.log("Render");
-
+  debugger;
   let postsElements = props.posts.map((p) => (
     <Post message={p.message} likeCount={p.likeCount} />
   ));
