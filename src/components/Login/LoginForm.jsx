@@ -1,43 +1,27 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Input } from "../common/FormsControls/FormsControls";
+import { CreateField, Input } from "../common/FormsControls/FormsControls";
 import { required, maxLengthCreator } from "../../utils/validators/validators";
 import stl from "./Login.module.css";
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error }) => {
   return (
     <>
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        {CreateField("Email", "email", [required], Input)}
+        {CreateField("Password", "password", [required], Input, {
+          type: "password",
+        })}
+        {CreateField(
+          null,
+          "rememberMe",
+          [required],
+          Input,
+          { type: "checkbox" },
+          "Remember me"
+        )}
         <div>
-          <Field
-            validate={[required]}
-            placeholder={"Email"}
-            component={Input}
-            name={"email"}
-          />
-        </div>
-        <div>
-          <Field
-            validate={[required]}
-            type={"password"}
-            placeholder={"Password"}
-            component={Input}
-            name={"password"}
-          />
-        </div>
-        <div>
-          <Field
-            validate={[required]}
-            type="checkbox"
-            component={Input}
-            name={"rememberMe"}
-          />
-          Remember me
-        </div>
-        <div>
-          {props.error && (
-            <div className={stl.formSummaryError}>{props.error}</div>
-          )}
+          {error && <div className={stl.formSummaryError}>{error}</div>}
           <button>Login</button>
         </div>
       </form>
