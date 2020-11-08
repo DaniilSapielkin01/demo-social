@@ -4,7 +4,7 @@ import { CreateField, Input } from "../common/FormsControls/FormsControls";
 import { required, maxLengthCreator } from "../../utils/validators/validators";
 import stl from "./Login.module.css";
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -22,6 +22,8 @@ const LoginForm = ({ handleSubmit, error }) => {
         )}
         <div>
           {error && <div className={stl.formSummaryError}>{error}</div>}
+          <div>{captchaUrl && <img src={captchaUrl} />}</div>
+          {CreateField("Symbols from image", "captcha", [required], Input)}
           <button>Login</button>
         </div>
       </form>
