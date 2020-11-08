@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, withRouter } from "react-router-dom";
+import {  Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
@@ -46,7 +46,10 @@ class App extends React.Component {
                 </React.Suspense>
               )}
             />
-            <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)} />
+            <Route
+              path="/profile/:userId?"
+              render={WithSuspense(ProfileContainer)}
+            />
             <Route path="/users" render={() => <UsersContainer />} />
             <Route path="/login" render={() => <Login />} />
           </div>

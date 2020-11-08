@@ -1,10 +1,11 @@
 import * as axios from "axios";
+import { Form } from "redux-form";
 
 const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
   withCredentials: true,
   headers: {
-    "API-KEY": "a18d807a-2423-4c95-88fc-34966c4ff0ed",
+    "API-KEY": "9f51da93-6f59-45e6-928a-c572a19b7a11",
   },
 });
 
@@ -38,6 +39,19 @@ export const profileAPI = {
     return instance.put(`profile/status/`, {
       status,
     });
+  },
+  savePhoto(photoFile) {
+    let formData = new FormData();
+    formData.append("image", photoFile);
+
+    return instance.put(`profile/photo`, formData, {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    });
+  },
+  saveProfile(profile) {
+    return instance.put(`profile`, profile);
   },
 };
 
