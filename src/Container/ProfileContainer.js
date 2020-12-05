@@ -7,14 +7,15 @@ import {
   getStatus,
   updateStatus,
   savePhoto,
-  saveProfile
+  saveProfile,
+  deletePost,
 } from "../redux/profile-reducer";
 import { Profile } from "../components/Profile/Profile";
 import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
   refrechProfile() {
-    //let userId взято из парам-ров в withRouter
+    //let userId взяот из парам-ров в withRouter
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = this.props.authorizedUserId;
@@ -63,7 +64,8 @@ const mapDispatchToProps = {
   getStatus,
   updateStatus,
   savePhoto,
-  saveProfile
+  saveProfile,
+  deletePost,
 };
 
 export default compose(

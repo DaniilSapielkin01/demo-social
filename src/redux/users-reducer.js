@@ -111,6 +111,7 @@ export const requestUsers = (page, pageSize) => {
     let data = await usersAPI
       .getUsers(page, pageSize)
       .dispatch(toggleIsFetching(false));
+
     dispatch(setUsers(data.items));
     dispatch(setTotalUsersCount(data.totalCount));
   };
@@ -123,12 +124,16 @@ const followUnfolloweFlow = async (
   actionCreator
 ) => {
   dispatch(toggleIsFollowingProgress(true, userId));
+  
   let response = await apiMethod(userId);
   if (response.data.resultCode == 0) {
     dispatch(actionCreator(userId));
   }
   dispatch(toggleIsFollowingProgress(false, userId));
 };
+
+
+
 export const follow = (userId) => {
   return async (dispatch) => {
     followUnfolloweFlow(

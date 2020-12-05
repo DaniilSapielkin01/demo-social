@@ -2,7 +2,7 @@ import React from "react";
 import stl from "./Users.module.css";
 import userPhoto from "../../assets/images/userPhoto.jpg";
 import { NavLink } from "react-router-dom";
-import { Paginator } from "../common/Paginator/Paginator";
+import { Paginator } from "../common/FormsControls/Paginator/Paginator";
 
 export const Users = (props) => {
   const { totalUsersCount, pageSize, currentPage, onPageChanged } = props;

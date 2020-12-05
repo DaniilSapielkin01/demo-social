@@ -31,6 +31,7 @@ type InitializedSuccessType = {
 export const initializedSuccess = (): InitializedSuccessType => ({
   type: INITIALIZED_SUCCESS,
 });
+
 export const initializeApp = () => (dispatch: any) => {
   let promise = dispatch(getAuthUserData());
 

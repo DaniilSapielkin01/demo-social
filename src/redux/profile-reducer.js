@@ -15,7 +15,6 @@ let initialState = {
     { id: 1, message: "First post " },
     { id: 2, message: "Second post )" },
   ],
-
   status: "",
 };
 
@@ -92,6 +91,7 @@ const saveProfileSuccess = (formData) => ({
 
 //Use thunk
 export const getUserProfile = (userId) => async (dispatch) => {
+  console.log(dispatch);
   const response = await usersAPI.getProfile(userId);
   dispatch(setUserProfile(response.data));
 };
@@ -100,6 +100,8 @@ export const getStatus = (userId) => async (dispatch) => {
   const response = await profileAPI.getStatus(userId);
   dispatch(setUserStatus(response.data));
 };
+
+
 export const updateStatus = (status) => async (dispatch) => {
   const response = await profileAPI.updateStatus(status);
   if (response.data.resultCode === 0) {

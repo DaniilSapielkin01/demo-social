@@ -10,6 +10,7 @@ export const Post = (props) => {
       />
       {props.message}
       <div>
+        <button onClick={props.onDeletePost}>delete</button>
         <span>{props.likeCount}</span>
       </div>
     </div>
