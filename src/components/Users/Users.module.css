@@ -1,12 +1,62 @@
 .userPhoto {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  margin: 5px;
-  object-fit: cover;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 5px;
+    object-fit: cover;
 }
+
 .selectedPage {
-  font-weight: bold;
-  color: green;
-  cursor: pointer;
+    font-weight: bold;
+    color: #cecece;
+    cursor: pointer;
+}
+
+.imageProfile {
+    height: 60px;
+    width: 60px;
+    margin-right: 20px;
+}
+
+.bodyCard {
+    display: flex;
+    border-radius: 10px;
+    min-height: 70px;
+    width: 70%;
+    margin: 15px auto;
+    transition: 0.4s ease;
+    cursor: pointer;
+    background: #252526;
+    align-items: center;
+    padding: 5px 8px;
+}
+
+.root :hover {
+    background: #252f3c;
+}
+
+.bodyCard :hover {
+    background: transparent;
+}
+
+.userNameCard {
+    margin-bottom: 10px;
+}
+
+.cardBorder {
+    margin: 0 15px;
+    color: #b0b3b8;
+}
+
+.cardInfo {
+    display: flex;
+    flex-direction: column;
+    color: #e3e5ea;
+    font-size: 18px;
+    justify-content: center;
+}
+
+.userEmail {
+    color: #b0b3b8;
+    font-size: 15px;
 }

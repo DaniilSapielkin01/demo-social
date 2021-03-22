@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import {setNews} from "../redux/news-reducer";
 
 const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -17,6 +18,15 @@ export const usersAPI = {
       .then((response) => response.data);
   },
 };
+
+export const getNewsPost = (userId = 1) => {
+  axios
+    .get(`https://jsonplaceholder.typicode.com/posts/${userId}`)
+    .then(resp => {
+      setNews(resp.data)
+    })
+    .catch(error => console.log(error))
+}
 
 export const getUsers2 = (currentPage = 1, pageSize = 1) => {
   instance

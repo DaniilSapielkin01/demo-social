@@ -1,107 +1,68 @@
-import React from "react";
-import stl from "./Users.module.css";
-import userPhoto from "../../assets/images/userPhoto.jpg";
-import { NavLink } from "react-router-dom";
-import * as axios from "axios";
+import React, {useEffect, useState} from "react";
+import {NavLink} from "react-router-dom";
+import classes from './Users.module.css'
+import {ReactComponent as IconProfile} from '../../assets/images/profile.svg'
+
+import Skeleton from "react-loading-skeleton";
+
 
 export const Users = (props) => {
-  const { totalUsersCount, pageSize } = props;
+  const [isLoading, setIsLoading] = useState(props.isLoading)
+
+  const {totalUsersCount, pageSize} = props;
+
+  setTimeout(() => {
+    setIsLoading(true)
+  }, 1400)
 
   let pages = [];
   let pagesCount = Math.ceil(totalUsersCount / pageSize);
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
+  console.log(isLoading)
   return (
-    <div>
-      <div>
-        {pages.map((pg) => (
-          <span
-            className={props.currentPage === pg ? stl.selectedPage : ""}
-            onClick={() => props.onPageChanged(pg)}
-          >
-            {pg}
-          </span>
-        ))}
-      </div>
-      <button onClick={props.getUsers}>Получить пользователей</button>
-      {props.users.map((us) => (
-        <div>
-          <span>
-            <div>
-              <NavLink to={`/profile/${us.id}`}>
-                <img
-                  className={stl.userPhoto}
-                  src={us.photoUrl ? us.photoUrl : userPhoto}
-                  alt="img"
-                />
-              </NavLink>
+    <div className={classes.root}>
+      {props.users.map((user) => (
+        <NavLink to={`/profile/${user.id}`}>
+
+          <div className={classes.bodyCard}>
+            <div className={classes.imageProfile}>
+              {
+                isLoading ? <IconProfile/> :
+                  <Skeleton circle={true} height={60} width={60}/>
+              }
+
             </div>
-            <div>
-              {us.followed ? (
-                <button
-                  disabled={props.followingInProgress.some(
-                    (id) => id === us.id
-                  )}
-                  onClick={() => {
-                    props.toggleIsFollowingProgress(true, us.id);
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${us.id}`,
-                        {},
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "e0688eb2-71da-40be-8070-2eff5afe656b",
-                          },
-                        }
-                      )
-                      .then((response) => {
-                        if (props.follow(response.data.resultCode !== 0)) {
-                          props.unFollow(us.id);
-                        }
-                        props.toggleIsFollowingProgress(false, us.id);
-                      });
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                  disabled={props.followingInProgress.some(
-                    (id) => id === us.id
-                  )}
-                  onClick={() => {
-                    props.toggleIsFollowingProgress(true, us.id);
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${us.id}`,
-                        {},
-                        {
-                          withCredentials: true,
-                        }
-                      )
-                      .then((response) => {
-                        if (props.follow(response.data.resultCode == 0)) {
-                          props.follow(us.id);
-                        }
-                        props.toggleIsFollowingProgress(false, us.id);
-                      });
-                  }}
-                >
-                  Follow
-                </button>
-              )}
+            <div className={classes.cardInfo}>
+              <div className={classes.userNameCard}>
+
+                {
+                  isLoading ? <span>{user.name}</span> :
+                    <Skeleton width={200} height={20}/>
+                }
+              </div>
+              <div className={classes.userEmail}>
+                {
+                  isLoading ? <span>E-mail: {user.email}</span>
+                    : <Skeleton width={200} height={15}/>
+                }
+
+                <span className={classes.cardBorder}>
+                {isLoading && <span>|</span>}
+                </span>
+
+                {
+                  isLoading ? <span><span>Phone:</span> {user.phone} </span>
+                    : <Skeleton width={200} height={15}/>
+                }
+
+              </div>
             </div>
-          </span>
-          <span>
-            <span>
-              <div>{us.name}</div>
-              <div>{us.status}</div>
-            </span>
-            <span>{/* <div>{us.location.city}</div> */}</span>
-          </span>
-        </div>
+
+          </div>
+
+        </NavLink>
       ))}
     </div>
   );

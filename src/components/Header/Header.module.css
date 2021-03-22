@@ -1,22 +1,28 @@
 .header {
-  grid-area: h;
-  background-color: green;
+    grid-area: h;
+    background-color: #252526;
+    border: 1px solid #3e3e3f;
+    border-top: none;
 }
+
 .header img {
-  width: 5%;
-  margin: 10px;
+    width: 5%;
+    margin: 10px;
 }
+
 .loginBlock {
-  float: right;
-  margin: 15px;
-  padding-top: 3px;
-  font-weight: bold;
-  text-align: center;
+    float: right;
+    margin: 15px;
+    padding-top: 3px;
+    font-weight: bold;
+    text-align: center;
 }
+
 .loginBlock a {
-  color: aliceblue;
+    color: aliceblue;
 }
+
 .loginBlock :hover {
-  color: rgb(31, 152, 223);
-  transition: all 0.3s ease;
+    color: rgb(31, 152, 223);
+    transition: all 0.3s ease;
 }
